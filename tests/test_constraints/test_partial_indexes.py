@@ -447,7 +447,9 @@ def test_fallback_detection_of_partial_indexes_with_enum_expressions(connection:
     # Verify that searching for other_schema.task_priority finds its index
     other_indexes = get_dependent_indexes(connection, ANOTHER_SCHEMA_NAME, "task_priority")
     other_index_names = {idx.name for idx in other_indexes}
-    assert any(f"idx_{ANOTHER_SCHEMA_NAME}_priority" in name for name in other_index_names), f"Should find index in {ANOTHER_SCHEMA_NAME}"
+    assert any(
+        f"idx_{ANOTHER_SCHEMA_NAME}_priority" in name for name in other_index_names
+    ), f"Should find index in {ANOTHER_SCHEMA_NAME}"
 
 
 def test_non_partial_indexes_not_explicitly_dropped(connection: "Connection"):
